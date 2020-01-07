@@ -13,5 +13,5 @@ class User < ApplicationRecord
   validates :image_link, presence: true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation
+  # attr_accessible :email, :password, :password_confirmation
 end
