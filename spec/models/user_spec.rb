@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, email: 'ALLCAPSMAILHELLYAS@mail.com') }
   let(:user_no_first_name) { build(:user, first_name: '') }
   let(:user_no_last_name) { build(:user, last_name: '') }
   let(:user_no_email) { build(:user, email: '') }
@@ -38,6 +38,14 @@ RSpec.describe User, type: :model do
 
     it 'Test if user with a duplicate email is invalid' do
       expect(user_same_mail.valid?).to be false
+    end
+
+    it 'Test if an image_link field was created for saved user' do
+      expect(user.image_link).to_not be nil
+    end
+
+    it 'Test if saved user email was converted to lowercase' do
+      expect(user.email).to match(/\p{Lower}/)
     end
   end
 end
