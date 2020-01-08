@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:success] = 'User successfully created'
-      redirect_to @user
+      redirect_to posts_path
     else
       flash.now[:error] = 'Error saving new user :-('
       render 'new'
