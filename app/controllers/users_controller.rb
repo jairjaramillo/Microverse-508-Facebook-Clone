@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:new, :create]
 
   def new
     @user = User.new
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
       flash[:success] = 'User successfully deleted'
       redirect_to users_path
     else
-      flash[:error] = 'Error saving deleting user :-('
+      flash[:error] = 'Error deleting user :-('
       redirect_to users_path
     end
   end
