@@ -1,5 +1,6 @@
 <h1>Posts#new</h1>
 <p>Find me in app/views/posts/show.html.erb</p>
 
-
-<%= content_tag(:p, "#{@author.first_name} #{@author.last_name}") + content_tag(:p, "#{@post.content}") %>
+<main id="post_page">
+  <%= content_tag(:p, "#{@author.first_name} #{@author.last_name}") + content_tag(:p, "#{@post.content}") %>
+</main>
