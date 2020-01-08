@@ -11,15 +11,15 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.author_id = current_user.id
+    @author = current_user
+    @post = @author.posts.build(post_params)
 
     if @post.save
       flash[:success] = 'Post successfully created'
       redirect_to @post
     else
-      flash.now[:error] = 'Error saving new post :-('
-      redirect_to @post
+      flash[:error] = 'Error saving new post :-('
+      redirect_to posts_path
     end
   end
 
@@ -34,15 +34,16 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     if @post&.destroy
       flash[:success] = 'Post successfully deleted'
-      redirect_to post_path
+      redirect_to posts_path
     else
-      flash[:error] = 'Error deleting post :-('
-      redirect_to post_path
+      flash.now[:error] = 'Error deleting post :-('
+      redirect_to posts_path
     end
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.all_latest
+    @post = Post.new
   end
 
   private
