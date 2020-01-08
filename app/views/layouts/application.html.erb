@@ -10,11 +10,7 @@
   </head>
 
   <body>
-    <% flash.each do |key, value| %>
-      <p>
-        <%= value %>
-      </p>
-    <% end %>
+    <%= render 'layouts/fb_nav' %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
