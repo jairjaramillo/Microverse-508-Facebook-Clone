@@ -4,11 +4,12 @@ require 'rails_helper'
 
 feature 'Visit ' do
   let(:user) { create(:user) }
-  let(:post1) { create(:post, content: 'This is the first test comment with the minimum length.') }
-  let(:post2) { create(:post, content: 'This is the second test comment with the minimum length.') }
-  let(:post3) { create(:post, content: 'This is the third test comment with the minimum length.') }
 
   scenario 'signed-in user views posts at index page in descending creation order' do
+    create(:post, content: 'This is the first test comment with the minimum length.')
+    create(:post, content: 'This is the second test comment with the minimum length.')
+    create(:post, content: 'This is the third test comment with the minimum length.')
+  
     login(user)
 
     visit posts_path
