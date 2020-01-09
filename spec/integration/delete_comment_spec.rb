@@ -29,6 +29,6 @@ feature 'Create new post' do
     login(user2)
     visit post_path(post)
     expect(page).to have_content(comment_to_delete)
-    expect(page).to_not have_xpath("//a", text: 'delete')
+    expect(page).to_not have_xpath('//a', text: 'delete')
   end
 end

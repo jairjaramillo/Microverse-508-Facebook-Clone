@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   before_action :authenticate_user!
 
@@ -15,7 +17,7 @@ class CommentsController < ApplicationController
       redirect_to post_path(post)
     else
       flash[:error] = 'Error saving comment :-('
-      redirect_to  request.referer
+      redirect_to request.referer
     end
   end
 
@@ -32,11 +34,9 @@ class CommentsController < ApplicationController
     redirect_to request.referer
   end
 
-  def edit
-  end
+  def edit; end
 
-  def update
-  end
+  def update; end
 
   private
 

@@ -9,7 +9,7 @@ feature 'Visit ' do
     create(:post, content: 'This is the first test comment with the minimum length.')
     create(:post, content: 'This is the second test comment with the minimum length.')
     create(:post, content: 'This is the third test comment with the minimum length.')
-  
+
     login(user)
 
     visit posts_path

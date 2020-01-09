@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CommentsHelper
   def comment_list(comments)
     content_tag :div do
@@ -8,8 +10,8 @@ module CommentsHelper
   end
 
   def delete_comment(comment)
-    if comment.commenter == current_user
-      link_to 'delete', comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' }
-    end
+    return if comment.commenter != current_user
+
+    link_to 'delete', comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' }
   end
 end

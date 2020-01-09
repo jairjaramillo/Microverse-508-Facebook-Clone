@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 class LikesController < ApplicationController
   def create
     like = Like.new(like_params)
 
-    if like.save
-      flash[:success] = 'Liked!'
-    else
-      flash[:success] = 'Error, could not like post' 
-    end
+    flash[:success] = if like.save
+                        'Liked!'
+                      else
+                        'Error, could not like post'
+                      end
     redirect_to request.referer
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LikesHelper
   def like_or(post)
     like = Like.liked?(post, current_user)

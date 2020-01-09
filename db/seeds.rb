@@ -15,11 +15,14 @@
 end
 
 20.times do |i|
+  post = Post.find(i + 1)
   5.times do |j|
-    rando = (rand * 10).to_i
-    comment = Post.find(i + 1).comments.build(commenter_id: rando,
+    rando = (rand * 20).to_i
+    comment = post.comments.build(commenter_id:  rando,
                                           content: "Rando comment ##{j}: Lorem ipsum dolor sit amet,
                                           consectetur adipiscing elit.")
     comment.save
+    
+    Like.create(user_id: rando, post_id: post.id)
   end
 end
