@@ -10,12 +10,12 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @author = @post.author
+    @comment = Comment.new
   end
 
   def create
     @author = current_user
     @post = @author.posts.build(post_params)
-    # @post = Post.new(content: 'This is a very very valid comment omg', author_id: 10)
 
     if @post.save
       flash[:success] = 'Post successfully created'

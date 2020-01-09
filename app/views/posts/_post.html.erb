@@ -1,3 +1,5 @@
 <div>
   <%= content_tag(:p, "#{post.author.first_name} #{post.author.last_name}") + content_tag(:p, "#{post.content}") %>
+  <%= render 'comments/form', post: post %>
+  <%= comment_list(post.comments) %>
 </div>
