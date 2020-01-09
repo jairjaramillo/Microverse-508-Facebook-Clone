@@ -17,7 +17,7 @@ end
 20.times do |i|
   5.times do |j|
     rando = (rand * 10).to_i
-    comment = Post.find(i).comments.build(commenter_id: rando,
+    comment = Post.find(i + 1).comments.build(commenter_id: rando,
                                           content: "Rando comment ##{j}: Lorem ipsum dolor sit amet,
                                           consectetur adipiscing elit.")
     comment.save
