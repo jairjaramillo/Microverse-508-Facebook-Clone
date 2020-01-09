@@ -1,0 +1,7 @@
+<h1>User#show</h1>
+<p>Find me in app/views/user/show.html.erb</p>
+<%= user_gravatar @user %>
+
+<h2><%= @user.first_name%>'s posts<h2>
+
+<%= post_list(@user.posts) %>
