@@ -12,7 +12,7 @@ feature 'User signup' do
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
     fill_in 'Password confirmation', with: user.password
-   
+
     expect do
       click_button 'Sign up'
     end.to change(User, :count).by(1)
@@ -21,5 +21,4 @@ feature 'User signup' do
 
     expect(page).to have_css('#posts')
   end
-
 end

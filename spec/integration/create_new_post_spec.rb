@@ -19,17 +19,19 @@ feature 'Create new post' do
     expect(page).to have_css('#post_page')
   end
 
-  scenario 'signed-in user submits a post without content should be redirected ' do
-    post_content = 'This is a test comment with the minimum length.'
+  scenario 'signed-in user submits a post without content should be redirected to posts and get an error flash' do
+    post_content = 'Short post.'
     login(user)
     visit new_post_path
     fill_in 'Content', with: post_content
 
     expect do
       click_button 'submit post'
-    end.to change(Post, :count).by(1)
+    end.to change(Post, :count).by(0)
 
-    expect(page).to have_content(post_content)
-    expect(page).to have_css('#post_page')
+    expect(page).to have_content('Content is too short (minimum is 20 characters)')
+    expect(page).to have_no_content(post_content)
+
+    expect(page).to have_css('#posts')
   end
 end

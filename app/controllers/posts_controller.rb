@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
   before_action :authenticate_user!
 
@@ -19,7 +21,8 @@ class PostsController < ApplicationController
       flash[:success] = 'Post successfully created'
       redirect_to @post
     else
-      flash[:error] = 'Error saving new post :-('
+      error_str = error_messages('Error saving new post: ', @post.errors.full_messages)
+      flash[:error] = error_str
       redirect_to posts_path
     end
   end
@@ -28,18 +31,16 @@ class PostsController < ApplicationController
     @post = Post.find(post_params)
   end
 
-  def update
-  end
+  def update; end
 
   def destroy
     @post = Post.find(params[:id])
     if @post&.destroy
       flash[:success] = 'Post successfully deleted'
-      redirect_to posts_path
     else
       flash.now[:error] = 'Error deleting post :-('
-      redirect_to posts_path
     end
+    redirect_to posts_path
   end
 
   def index
@@ -51,5 +52,13 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:content)
+  end
+
+  def error_messages(str, array)
+    final_str = str
+    array.each do |err|
+      final_str += err
+    end
+    final_str
   end
 end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:new, :create]
+  before_action :authenticate_user!, except: %i[new create]
 
   def new
     @user = User.new
@@ -29,18 +31,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def update
-  end
+  def update; end
 
   def destroy
     @user = User.find(params[:id])
     if @user&.destroy
       flash[:success] = 'User successfully deleted'
-      redirect_to users_path
     else
       flash[:error] = 'Error deleting user :-('
-      redirect_to users_path
     end
+    redirect_to users_path
   end
 
   private

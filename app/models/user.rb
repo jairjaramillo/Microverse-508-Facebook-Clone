@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   before_create :process_mail
   before_save :add_gravatar
@@ -14,11 +16,11 @@ class User < ApplicationRecord
   private
 
   def process_mail
-    self.email = self.email.downcase
+    self.email = email.downcase
   end
 
   def add_gravatar
-    gravatar_id = Digest::MD5::hexdigest(self.email)
+    gravatar_id = Digest::MD5.hexdigest(email)
     self.image_link = "http://secure.gravatar.com/avatar/#{gravatar_id}"
   end
 end

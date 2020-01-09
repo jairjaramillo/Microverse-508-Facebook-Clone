@@ -39,7 +39,9 @@ RSpec.describe User, type: :model do
     it 'Test if user with a duplicate email is invalid' do
       expect(user_same_mail.valid?).to be false
     end
+  end
 
+  context 'Test model class methods' do
     it 'Test if an image_link field was created for saved user' do
       expect(user.image_link).to_not be nil
     end
