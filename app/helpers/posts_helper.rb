@@ -4,9 +4,24 @@ module PostsHelper
   def post_list(posts)
     content_tag :div do
       posts.collect do |post|
-        concat((link_to  "#{post.created_at}", post_path(post)) +
-          render('posts/post', post: post)  + content_tag(:hr))
+        concat((link_to "#{post.created_at}", post_path(post)) +
+        render('posts/post', post: post, show_likes: false) + content_tag(:hr))
       end
+    end
+  end
+
+  def likes_list(likes)
+    content_tag :div do
+      likes.collect do |like|
+        concat(render('users/likes', user: "#{like.user.first_name} #{like.user.last_name}"))
+      end
+    end
+  end
+
+  def who_likes(show_likes, list)
+    if show_likes
+      content_tag(:h2, 'People who liked this:') +
+      likes_list(list)
     end
   end
 end

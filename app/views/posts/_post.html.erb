@@ -1,6 +1,8 @@
 <div>
   <%= content_tag(:p, "#{post.author.first_name} #{post.author.last_name}") + content_tag(:p, "#{post.content}") %>
   <%= render 'comments/form', post: post %>
-  <%= comment_list(post.comments) %>
+  <p> <%= post.likes.count %> users liked this post! </p>
   <%= like_or(post) %>
+  <%= comment_list(post.comments) %>
+  <%= who_likes(show_likes, post.likes) %>
 </div>

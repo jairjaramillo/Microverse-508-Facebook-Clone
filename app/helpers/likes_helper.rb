@@ -1,6 +1,6 @@
 module LikesHelper
   def like_or(post)
-    like = Like.liked?(post, current_user) 
+    like = Like.liked?(post, current_user)
     if like
       button_to 'Dislike', like_path(like), method: :delete
     else

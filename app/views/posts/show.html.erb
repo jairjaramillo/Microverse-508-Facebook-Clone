@@ -2,6 +2,6 @@
 <p>Find me in app/views/posts/show.html.erb</p>
 
 <main id="post_page">
-  <%= render 'posts/post', post: @post %>
+  <%= render 'posts/post', post: @post, show_likes: true %>
 </main>
 <%= link_to 'Back', posts_path %>
