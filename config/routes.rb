@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users, except: [:new]
   resources :posts
+  resources :comments, only: [:new, :create, :edit, :destroy, :update]
 
   get 'users/new', to: 'devise/registrations#new'
 
