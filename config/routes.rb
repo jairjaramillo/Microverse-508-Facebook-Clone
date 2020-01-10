@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get 'users/new', to: 'devise/registrations#new'
   get 'friends/', to: 'friendships#friends'
+  post 'friendships/:id', to: 'friendships#update'
 
   root to: 'posts#index'
 

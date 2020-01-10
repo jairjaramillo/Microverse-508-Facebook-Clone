@@ -47,7 +47,7 @@ class FriendshipsController < ApplicationController
   end
 
   def friends
-    @friends = current_user.friends
+    @friends = current_user.friends(current_user)
   end
 
   private
