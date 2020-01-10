@@ -19,8 +19,16 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
 
-  def friendships
-    (initiated_friendships + requested_friendships).uniq
+  def friendships(status = true)
+    (sent_requests(status) + received_requests(status)).uniq
+  end
+
+  def received_requests(status = nil)
+    requested_friendships.where('status IS ?', status)
+  end
+
+  def sent_requests(status = nil)
+    initiated_friendships.where('status IS ?', status)
   end
 
   private
