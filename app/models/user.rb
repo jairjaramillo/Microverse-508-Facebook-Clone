@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :posts, foreign_key: 'author_id', class_name: 'Post', dependent: :destroy, inverse_of: :author
   has_many :comments, foreign_key: 'commenter_id', class_name: 'Comment', dependent: :destroy, inverse_of: :commenter
   has_many :likes
+  has_many :liked_posts, through: :likes, foreign_key: 'post_id', source: :user
 
   validates :first_name, presence: true
   validates :last_name, presence: true
