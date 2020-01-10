@@ -4,11 +4,11 @@ class LikesController < ApplicationController
   def create
     like = Like.new(like_params)
 
-    flash[:success] = if like.save
-                        'Liked!'
-                      else
-                        'Error, could not like post'
-                      end
+    if like.save
+      flash[:success] = 'Liked!'
+    else
+      flash[:error] = 'Error, could not like post'
+    end
     redirect_to request.referer
   end
 

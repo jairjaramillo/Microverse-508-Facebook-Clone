@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  resources :friendships, only: [:create, :update, :destroy]
   resources :likes, only: [:create, :destroy]
   resources :users, except: [:new]
   resources :posts

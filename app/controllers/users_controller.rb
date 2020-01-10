@@ -21,6 +21,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @friend_requests = @user.received_requests
   end
 
   def index
