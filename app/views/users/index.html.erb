@@ -4,9 +4,7 @@
 <% @users.each do |user| %>
   <div>
     <% if user != current_user %>
-      <%= user_gravatar user %>
-      <%= content_tag(:p, "#{user.first_name} - #{user.last_name}") %>
-      <%= render 'friendships/friendship' , user: user%>
+      <%= render 'users/user', user: user %>
     <% end %>
   </div>
 <% end %>

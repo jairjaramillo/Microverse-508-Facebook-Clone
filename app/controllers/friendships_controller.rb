@@ -15,7 +15,7 @@ class FriendshipsController < ApplicationController
   def destroy
     friendship = Friendship.find(params[:id])
 
-    return false unless friendship&.user == current_user
+    return false unless friendship&.receiver == current_user
 
     if friendship&.destroy
       flash[:success] = 'You are no longer friends...'
@@ -28,20 +28,26 @@ class FriendshipsController < ApplicationController
   def update
     friendship = Friendship.find(params[:id])
 
-    return false unless friendship&.user == current_user
+    return false unless friendship&.receiver == current_user
 
-    new_status = params[:friendship][:status]
-
-    if friendship&.update(status: new_status)
-      if new_status == true
+    if friendship&.update_attribute('status', params[:friendship][:status])
+      if params[:friendship][:status] == true
         flash[:success] = 'You are now friends!'
-      elsif new_status == false
+      elsif params[:friendship][:status] == false
         flash[:success] = 'User blocked succesfully...'
       end
     else
       flash[:error] = 'Error updating friend status'
     end
     redirect_to request.referer
+  end
+
+  def index
+    @requests = current_user.received_requests
+  end
+
+  def friends
+    @friends = current_user.friends
   end
 
   private

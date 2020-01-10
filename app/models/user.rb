@@ -23,6 +23,10 @@ class User < ApplicationRecord
     (sent_requests(status) + received_requests(status)).uniq
   end
 
+  def friends
+    User.joins(:friendship).all
+  end
+
   def received_requests(status = nil)
     requested_friendships.where('status IS ?', status)
   end
