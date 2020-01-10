@@ -1,8 +1,10 @@
 <div>
+  <%= link_to post.created_at.strftime('%d/%m/%Y %Hh:%M').to_s, post_path(post) %>
   <%= content_tag(:p, "#{post.author.first_name} #{post.author.last_name}") + content_tag(:p, "#{post.content}") %>
   <%= render 'comments/form', post: post %>
   <p> <%= post.likes.count %> users liked this post! </p>
   <%= like_or(post) %>
-  <%= comment_list(post.comments) %>
-  <%= who_likes(show_likes, post.likes) %>
+  <%= render post.comments %>
+  <div><%= who_likes(show_likes, post) %></div>
+  <hr>
 </div>
