@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :friendships, only: [:create, :update, :destroy, :index]
+  resources :friendships, only: [:create, :update, :destroy]
   resources :likes, only: [:create, :destroy]
   resources :users, except: [:new]
   resources :posts
@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'users/new', to: 'devise/registrations#new'
   get 'friends/', to: 'friendships#friends'
   post 'friendships/:id', to: 'friendships#update'
+  get 'friends/requests', to: 'friendships#index'
 
   root to: 'posts#index'
 

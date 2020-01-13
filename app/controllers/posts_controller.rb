@@ -44,18 +44,18 @@ class PostsController < ApplicationController
   end
 
   def index
-    # needs to be refactored and SORTED!
-    @friends = current_user.friends(current_user)
-    @current_user_posts = Post.where('author_id = ?', current_user.id)
-    @friends_posts = friends_posts(@friends, @current_user_posts)
-    @posts = @friends_posts
+    @friends_and_me = current_user.friends(current_user) << current_user
+    @posts = friends_posts(@friends_and_me)
     @post = Post.new
   end
 
-  def friends_posts(friends, current_user_posts)
-    posts = current_user_posts
+  def friends_posts(friends)
+    posts = []
     friends.each do |friend|
       posts += friend.posts
+    end
+    posts = posts.sort do |x, y|
+      y.created_at <=> x.created_at
     end
     posts
   end
