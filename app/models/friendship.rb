@@ -18,6 +18,7 @@ class Friendship < ApplicationRecord
   end
 
   def self.between(user1, user2)
-    Friendship.find_by('(sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?)', user1.id, user2.id, user2.id, user1.id)
+    Friendship.find_by('(sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?)',
+                       user1.id, user2.id, user2.id, user1.id)
   end
 end

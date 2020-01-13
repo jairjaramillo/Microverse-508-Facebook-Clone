@@ -2,8 +2,9 @@
 
 require 'rails_helper'
 
-def create_post
+def create_post(text = nil)
+  content = text.nil? ? 'This is a test post with the minimum length.' : text
   visit new_post_path
-  fill_in 'Content', with: 'This is a test post with the minimum length.'
+  fill_in 'Content', with: content
   click_button 'submit post'
 end
