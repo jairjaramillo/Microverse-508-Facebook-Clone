@@ -6,7 +6,7 @@ feature 'Create new post' do
   let(:user) { create(:user) }
 
   scenario 'signed-in user successfully creates a new post is redirected to the post page' do
-    post_content = 'This is a test comment with the minimum length.'
+    post_content = 'This is a test post with the minimum length.'
     login(user)
     visit new_post_path
     fill_in 'Content', with: post_content

@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 module PostsHelper
-  def post_list(posts)
-    content_tag :div do
-      posts.collect do |post|
-        concat(render('posts/post', post: post))
-      end
+  def who_likes(show_likes, post)
+    if show_likes
+      content_tag(:h2, 'People who liked this:', id: 'likers') +
+        (render partial: 'likes/like', collection: post.likes, as: :user)
+    else
+      ''
     end
   end
 end

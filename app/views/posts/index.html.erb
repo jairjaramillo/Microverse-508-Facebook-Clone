@@ -5,5 +5,5 @@
   <h2>Make a new post</h2>
   <%= render 'posts/new_post' %>
 
-  <%= post_list(@posts) %>
+  <%= render @posts, show_likes: false %>
 </main>
