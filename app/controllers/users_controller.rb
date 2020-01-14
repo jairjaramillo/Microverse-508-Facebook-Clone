@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @users = User.all.where('id != ?', current_user.id)
   end
 
   def edit

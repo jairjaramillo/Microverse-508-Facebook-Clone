@@ -25,7 +25,7 @@ class User < ApplicationRecord
 
   def friends
     User.joins(:initiated_friendships)
-      .where('status = ? AND (sender_id != ? AND receiver_id = ?)', true, self.id, self.id)
+      .where('status = ? AND (sender_id != ? AND receiver_id = ?)', true, id, id)
   end
 
   def received_requests(status = nil)

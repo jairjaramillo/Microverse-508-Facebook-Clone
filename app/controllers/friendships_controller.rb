@@ -57,7 +57,8 @@ class FriendshipsController < ApplicationController
   private
 
   def create_mutal_friend
-    if Friendship.create(sender_id: params[:friendship][:receiver_id], receiver_id: params[:friendship][:sender_id], status: params[:friendship][:status])
+    if Friendship.create(sender_id: params[:friendship][:receiver_id],
+                         receiver_id: params[:friendship][:sender_id], status: params[:friendship][:status])
       flash[:success] = 'You are now mutual friends!'
     else
       flash[:error] = 'Error updating friend status'
