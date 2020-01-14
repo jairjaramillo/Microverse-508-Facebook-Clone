@@ -29,6 +29,9 @@ Style/Documentation:
 Style/ClassAndModuleChildren:
   Enabled: false
 
+Layout/EndOfLine:
+  Enabled: false
+
 Layout/ExtraSpacing:
   AllowForAlignment: false
 Layout/MultilineMethodCallIndentation:
