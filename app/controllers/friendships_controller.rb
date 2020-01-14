@@ -33,8 +33,13 @@ class FriendshipsController < ApplicationController
     return false unless friendship&.receiver == current_user
 
     if friendship&.update_attribute('status', params[:friendship][:status])
-      if params[:friendship][:status] == true
+      mutual_friend = Friendship.new(sender_id: params[:friendship][:receiver_id], receiver_id: params[:friendship][:sender_id], status: params[:friendship][:status])
+
+      if mutual_friend.valid? && params[:friendship][:status] == true
+        mutual_friend.save
         flash[:success] = 'You are now friends!'
+      elsif !mutual_friend.valid?
+        flash[:error] = 'Couldn\'t save mutual friendship'
       elsif params[:friendship][:status] == false
         flash[:success] = 'User blocked succesfully...'
       end

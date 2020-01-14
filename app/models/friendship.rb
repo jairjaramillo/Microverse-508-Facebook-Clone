@@ -7,8 +7,8 @@ class Friendship < ApplicationRecord
   validate :friendship_exists?, :no_self_love
 
   def friendship_exists?
-    if Friendship.find_by('(sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?)',
-                          sender_id, receiver_id, receiver_id, sender_id)
+    if Friendship.find_by('sender_id = ? AND receiver_id = ?',
+                          sender_id, receiver_id)
       errors.add(:repeate_relation, 'Friendship relation already exists')
     end
   end
