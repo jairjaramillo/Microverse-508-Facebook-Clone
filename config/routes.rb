@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   post 'friendships/:id', to: 'friendships#update'
   get 'friends/requests', to: 'friendships#index'
 
+  get 'privacy_policy', to: 'static_pages#index'
+
   root to: 'posts#index'
 
   devise_scope :user do
