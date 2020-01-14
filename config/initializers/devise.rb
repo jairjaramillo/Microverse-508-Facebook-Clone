@@ -298,9 +298,10 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
 
   config.omniauth :facebook, ENV['FB_APP_ID'], ENV['FB_APP_SECRET'],
-  scope: 'email',
-  info_fields: 'email,first_name,last_name',
-  secure_image_url: true,
-  image_size: 'large',
-  token_params: { parse: :json }
+                  callback_url: 'https://warm-thicket-07457.herokuapp.com/users/auth/facebook/callback',
+                  scope: 'email',
+                  info_fields: 'email,first_name,last_name',
+                  secure_image_url: true,
+                  image_size: 'large',
+                  token_params: { parse: :json }
 end
