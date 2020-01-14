@@ -7,7 +7,6 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
   devise :omniauthable, omniauth_providers: %i[facebook]
 
   has_many :posts, foreign_key: 'author_id', class_name: 'Post', dependent: :destroy, inverse_of: :author
@@ -42,12 +41,16 @@ class User < ApplicationRecord
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
-      user.first_name = auth.info.name.split[0]
-      user.last_name = auth.info.name.split[1..-1].join
-      user.image_link = auth.info.image
+      user.first_name = auth.info.first_name # assuming the user model has a name
+      user.last_name = auth.info.last_name # assuming the user model has a name
+      user.image_link = auth.info.image # assuming the user model has an image
+      # If you are using confirmable and the provider(s) you use validate emails,
+      # uncomment the line below to skip the confirmation emails.
+      # user.skip_confirmation!
     end
   end
 
+  # rubocop:disable Lint/AssignmentInCondition
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session['devise.facebook_data'] && session['devise.facebook_data']['extra']['raw_info']
@@ -55,6 +58,7 @@ class User < ApplicationRecord
       end
     end
   end
+  # rubocop:enable Lint/AssignmentInCondition
 
   private
 
