@@ -1,3 +1,6 @@
+# require:
+#   - rubocop-rails
+
 AllCops:
   Exclude:
     - "bin/*"
@@ -24,6 +27,9 @@ Metrics/BlockLength:
 Style/Documentation:
   Enabled: false
 Style/ClassAndModuleChildren:
+  Enabled: false
+
+Layout/EndOfLine:
   Enabled: false
 
 Layout/ExtraSpacing:
