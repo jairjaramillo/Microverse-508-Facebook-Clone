@@ -10,7 +10,7 @@ module ApplicationHelper
         link_to(" Logged as: #{current_user.first_name} | ", user_path(current_user)) +
         link_to(" Friend requests: #{friend_request.count}", friends_requests_path)
     else
-      link_to 'Log-in |', new_user_session_path + link_to(' Sign-up', new_user_registration_path)
+      link_to('Log-in |', new_user_session_path) + link_to(' Sign-up', new_user_registration_path)
     end
   end
 
