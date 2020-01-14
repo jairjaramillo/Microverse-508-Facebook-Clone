@@ -44,13 +44,21 @@ class PostsController < ApplicationController
   end
 
   def index
-    @friends_and_me = current_user.friends(current_user) << current_user
+    @friends_and_me = current_user.friends
     @posts = friends_posts(@friends_and_me)
     @post = Post.new
   end
 
+  private
+
+  def post_params
+    params.require(:post).permit(:content)
+  end
+
   def friends_posts(friends)
     posts = []
+    posts += current_user.posts
+
     friends.each do |friend|
       posts += friend.posts
     end
@@ -58,12 +66,6 @@ class PostsController < ApplicationController
       y.created_at <=> x.created_at
     end
     posts
-  end
-
-  private
-
-  def post_params
-    params.require(:post).permit(:content)
   end
 
   def error_messages(str, array)

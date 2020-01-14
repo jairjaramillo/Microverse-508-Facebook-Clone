@@ -2,6 +2,7 @@
 
 class FriendshipsController < ApplicationController
   protect_from_forgery prepend: true
+  after_action :create_mutal_friend, only: [:update]
 
   def create
     friendship = Friendship.new(friendship_params)
@@ -33,18 +34,14 @@ class FriendshipsController < ApplicationController
     return false unless friendship&.receiver == current_user
 
     if friendship&.update_attribute('status', params[:friendship][:status])
-      mutual_friend = Friendship.new(sender_id: params[:friendship][:receiver_id], receiver_id: params[:friendship][:sender_id], status: params[:friendship][:status])
-
-      if mutual_friend.valid? && params[:friendship][:status] == true
-        mutual_friend.save
+      if params[:friendship][:status] == true
         flash[:success] = 'You are now friends!'
-      elsif !mutual_friend.valid?
-        flash[:error] = 'Couldn\'t save mutual friendship'
       elsif params[:friendship][:status] == false
         flash[:success] = 'User blocked succesfully...'
       end
     else
       flash[:error] = 'Error updating friend status'
+      return false
     end
     redirect_to request.referer
   end
@@ -54,10 +51,18 @@ class FriendshipsController < ApplicationController
   end
 
   def friends
-    @friends = current_user.friends(current_user)
+    @friends = current_user.friends
   end
 
   private
+
+  def create_mutal_friend
+    if Friendship.create(sender_id: params[:friendship][:receiver_id], receiver_id: params[:friendship][:sender_id], status: params[:friendship][:status])
+      flash[:success] = 'You are now mutual friends!'
+    else
+      flash[:error] = 'Error updating friend status'
+    end
+  end
 
   def friendship_params
     params.require(:friendship).permit(:sender_id, :receiver_id)
