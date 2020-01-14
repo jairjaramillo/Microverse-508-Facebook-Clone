@@ -1,0 +1,10 @@
+<% requests.each  do |request| %>
+  <%= user_gravatar request.sender %>
+  <%= "#{request.sender.first_name} #{request.sender.first_name} wants to be your friend" %>
+  <%= form_for :friendship, method: :put, url: friendship_path(request.id) do |f| %>
+    <%= f.hidden_field :sender_id, value: request.sender.id %>
+    <%= f.hidden_field :receiver_id, value: request.receiver.id %>
+    <%= f.hidden_field :status, value: true %>
+    <%= f.submit 'Accept friendship' %>
+  <% end %>
+<% end %>

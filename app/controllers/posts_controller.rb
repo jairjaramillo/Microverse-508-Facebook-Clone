@@ -44,8 +44,20 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all_latest
+    @friends_and_me = current_user.friends(current_user) << current_user
+    @posts = friends_posts(@friends_and_me)
     @post = Post.new
+  end
+
+  def friends_posts(friends)
+    posts = []
+    friends.each do |friend|
+      posts += friend.posts
+    end
+    posts = posts.sort do |x, y|
+      y.created_at <=> x.created_at
+    end
+    posts
   end
 
   private
