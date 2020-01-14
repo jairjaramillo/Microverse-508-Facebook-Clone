@@ -23,11 +23,9 @@ class User < ApplicationRecord
     (sent_requests(status) + received_requests(status)).uniq
   end
 
-  def friends(user)
+  def friends
     User.joins(:initiated_friendships)
-      .where('status = ? AND (sender_id != ? AND receiver_id = ?)', true, user.id, user.id) +
-      User.joins(:requested_friendships)
-      .where('status = ? AND (receiver_id != ? AND sender_id = ?)', true, user.id, user.id)
+      .where('status = ? AND (sender_id != ? AND receiver_id = ?)', true, id, id)
   end
 
   def received_requests(status = nil)
