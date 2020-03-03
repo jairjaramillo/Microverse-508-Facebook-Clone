@@ -175,7 +175,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     public_suffix (4.0.3)
-    puma (4.3.1)
+    puma (4.3.3)
       nio4r (~> 2.0)
     rack (2.1.1)
     rack-proxy (0.6.5)
@@ -325,7 +325,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   omniauth-facebook
   pg
-  puma (~> 4.1)
+  puma (~> 4.3)
   rails (~> 6.0.2, >= 6.0.2.1)
   rails_12factor
   rspec-rails
